@@ -1,15 +1,15 @@
 package zunior.lotto.generator.model;
 
-public class Payment {
+public class LottoPayment {
     private final Integer money;
 
-    private Payment(int money) {
+    private LottoPayment(int money) {
         this.money = money;
     }
 
-    public static Payment of(Integer money) {
+    public static LottoPayment of(Integer money) {
         validate(money);
-        return new Payment(money);
+        return new LottoPayment(money);
     }
 
     private static void validate(Integer money) {
@@ -18,7 +18,11 @@ public class Payment {
         }
     }
 
-    public int getLottoTicketCount(Integer lottoTickerPrice) {
-        return money / lottoTickerPrice;
+    public int getLottoTicketCount(Integer lottoTicketPrice) {
+        return money / lottoTicketPrice;
+    }
+
+    public Integer getMoney() {
+        return money;
     }
 }

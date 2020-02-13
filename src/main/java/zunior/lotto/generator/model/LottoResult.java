@@ -4,21 +4,31 @@ import java.util.Arrays;
 
 public enum LottoResult {
     // 영어로 꽝을 a blank라고 한다고..
-    BLANK(new Integer[]{0,1,2}),
-    THREE(new Integer[]{3}),
-    FOUR(new Integer[]{4}),
-    FIVE(new Integer[]{5}),
-    SIX(new Integer[]{6});
+    BLANK(new Integer[]{0,1,2}, 0),
+    THREE(new Integer[]{3}, 5000),
+    FOUR(new Integer[]{4}, 50000),
+    FIVE(new Integer[]{5}, 1500000),
+    SIX(new Integer[]{6}, 2000000000);
 
     private final Integer[] matchCounts;
+    private final Integer price;
 
-    LottoResult(final Integer[] matchCounts) {
+    LottoResult(final Integer[] matchCounts, final Integer price) {
         this.matchCounts = matchCounts;
+        this.price = price;
     }
 
     public Boolean hasCount(int count) {
         return Arrays.stream(matchCounts)
                 .anyMatch(matchCount -> matchCount.equals(count));
+    }
+
+    public Integer getMatchCount() {
+        return matchCounts[0];
+    }
+
+    public Integer getPrice() {
+        return price;
     }
 
     public static LottoResult of(int count) {

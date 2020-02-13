@@ -9,7 +9,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.junit.jupiter.MockitoExtension;
 import zunior.lotto.generator.model.LottoResult;
 import zunior.lotto.generator.model.LottoTicket;
-import zunior.lotto.generator.model.LottoTickets;
+import zunior.lotto.generator.service.impl.AutomaticLottoNumberGenerator;
+import zunior.lotto.generator.service.LottoNumberGenerator;
 
 import java.util.Arrays;
 import java.util.List;

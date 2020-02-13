@@ -1,8 +1,8 @@
 package zunior.lotto.generator.model;
 
-import zunior.lotto.generator.LottoNumberGenerator;
+import zunior.lotto.generator.service.LottoNumberGenerator;
 
-import java.util.Iterator;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoTicket {
@@ -11,6 +11,7 @@ public class LottoTicket {
 
     private LottoTicket(LottoNumberGenerator lottoNumberGenerator) {
         this.lottoNumbers = lottoNumberGenerator.generate();
+        Collections.sort(this.lottoNumbers);
     }
 
     public static LottoTicket create(LottoNumberGenerator lottoNumberGenerator) {
@@ -30,5 +31,9 @@ public class LottoTicket {
         return lottoNumbers.stream()
                 .filter(number -> winNumbers.contains(number))
                 .count();
+    }
+
+    public Integer[] toArray() {
+        return lottoNumbers.toArray(new Integer[0]);
     }
 }

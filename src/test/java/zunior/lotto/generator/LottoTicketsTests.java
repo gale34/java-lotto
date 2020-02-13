@@ -3,11 +3,11 @@ package zunior.lotto.generator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import zunior.lotto.generator.model.LottoTickets;
-import zunior.lotto.generator.model.Payment;
+import zunior.lotto.generator.model.LottoPayment;
+import zunior.lotto.generator.service.impl.AutomaticLottoNumberGenerator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -19,8 +19,8 @@ public class LottoTicketsTests {
     @ParameterizedTest(name = "구입 금액 : {0}. 구입한 로또 갯수 : {1}")
     @CsvSource({"14000, 14", "1000, 1", "600, 0", "2500, 2"})
     public void purchaseTest(int cost, int lottoCount) {
-        Payment payment = Payment.of(cost);
-        LottoTickets lottoTickets = LottoTickets.create(payment, new AutomaticLottoNumberGenerator());
+        LottoPayment lottoPayment = LottoPayment.of(cost);
+        LottoTickets lottoTickets = LottoTickets.create(lottoPayment, new AutomaticLottoNumberGenerator());
         assertThat(lottoTickets.getTicketCount()).isEqualTo(lottoCount);
     }
 
@@ -29,6 +29,6 @@ public class LottoTicketsTests {
     @NullSource
     @ValueSource(ints = {-1, -100})
     public void purchaseWithMinusPaymentTest(Integer cost) {
-        assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> Payment.of(cost));
+        assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> LottoPayment.of(cost));
     }
 }

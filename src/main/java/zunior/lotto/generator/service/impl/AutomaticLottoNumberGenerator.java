@@ -1,4 +1,6 @@
-package zunior.lotto.generator;
+package zunior.lotto.generator.service.impl;
+
+import zunior.lotto.generator.service.LottoNumberGenerator;
 
 import java.util.Collections;
 import java.util.List;
@@ -22,6 +24,9 @@ public class AutomaticLottoNumberGenerator implements LottoNumberGenerator {
     @Override
     public List<Integer> generate() {
         Collections.shuffle(lottoNumbers);
-        return lottoNumbers.subList(0, LOTTO_NUMBER_SIZE);
+        return IntStream.rangeClosed(0, LOTTO_NUMBER_SIZE)
+                .map(i -> lottoNumbers.get(i))
+                .boxed()
+                .collect(Collectors.toList());
     }
 }

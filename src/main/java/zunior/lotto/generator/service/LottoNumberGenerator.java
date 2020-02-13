@@ -1,4 +1,4 @@
-package zunior.lotto.generator;
+package zunior.lotto.generator.service;
 
 import java.util.List;
 
