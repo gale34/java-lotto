@@ -10,7 +10,7 @@ public class LottoTickets {
 
     private final List<LottoTicket> tickets;
 
-    private static final Integer LOTTO_TICKER_PRICE = 1000;
+    private static final Integer LOTTO_TICKET_PRICE = 1000;
 
     private LottoTickets(List<LottoTicket> tickets) {
         this.tickets = tickets;
@@ -18,7 +18,7 @@ public class LottoTickets {
 
     public static LottoTickets create(LottoPayment lottoPayment, LottoNumberGenerator lottoNumberGenerator) {
         List<LottoTicket> tickets = new ArrayList<>();
-        int ticketCount = lottoPayment.getLottoTicketCount(LOTTO_TICKER_PRICE);
+        int ticketCount = lottoPayment.getLottoTicketCount(LOTTO_TICKET_PRICE);
         for (int i = 0; i < ticketCount; i++) {
             tickets.add(LottoTicket.create(lottoNumberGenerator));
         }

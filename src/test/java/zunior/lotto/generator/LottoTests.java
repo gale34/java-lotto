@@ -31,13 +31,13 @@ public class LottoTests {
     @DisplayName("로또 자동 생성 번호 개수 검증")
     @Test
     public void lottoNumberSizeTest() {
-        assertThat(lottoNumbers(new AutomaticLottoNumberGenerator()).size()).isEqualTo(LOTTO_NUMBER_SIZE);
+        assertThat(lottoNumbers(new AutomaticLottoNumberGenerator()).length).isEqualTo(LOTTO_NUMBER_SIZE);
     }
 
     @DisplayName("로또 자동 생성 번호 검증")
     @Test
     public void lottoNumbersTest() {
-        lottoNumbers(new AutomaticLottoNumberGenerator()).stream()
+        Arrays.stream(lottoNumbers(new AutomaticLottoNumberGenerator()))
                 .forEach(number -> assertThat(number).isBetween(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER));
     }
 
@@ -54,9 +54,9 @@ public class LottoTests {
         assertThat(actualResult).isEqualTo(lottoResult);
     }
 
-    private List<Integer> lottoNumbers(LottoNumberGenerator lottoNumberGenerator) {
+    private Integer[] lottoNumbers(LottoNumberGenerator lottoNumberGenerator) {
         LottoTicket lottoTicket = LottoTicket.create(lottoNumberGenerator);
-        return lottoTicket.getNumbers();
+        return lottoTicket.toArray();
     }
 
     private static Stream lottoWinTestStream() {

@@ -18,10 +18,6 @@ public class LottoTicket {
         return new LottoTicket(lottoNumberGenerator);
     }
 
-    public List<Integer> getNumbers() {
-        return lottoNumbers;
-    }
-
     public LottoResult check(List<Integer> winNumbers) {
         int matchCount = Math.toIntExact(matchWithWinNumbers(winNumbers));
         return LottoResult.of(matchCount);

@@ -18,11 +18,11 @@ public class LottoPayment {
         }
     }
 
-    public int getLottoTicketCount(Integer lottoTicketPrice) {
+    public Integer getLottoTicketCount(Integer lottoTicketPrice) {
         return money / lottoTicketPrice;
     }
 
-    public Integer getMoney() {
-        return money;
+    public Long calculateProfit(Long totalPrice) {
+        return Math.round(totalPrice / (double) money) * 100;
     }
 }

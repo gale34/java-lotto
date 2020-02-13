@@ -21,7 +21,7 @@ public class OutputConsoleView {
     }
 
     public static void printLottoResults(LottoResults lottoResults, LottoPayment payment) {
-        System.out.println("당첨 통계");
+        System.out.println("\n당첨 통계");
         System.out.println("---------");
         Map<LottoResult, Long> result = lottoResults.getResult();
         result.keySet()

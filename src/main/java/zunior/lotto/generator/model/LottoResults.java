@@ -1,7 +1,6 @@
 package zunior.lotto.generator.model;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -19,11 +18,15 @@ public class LottoResults {
     }
 
     public Long getProfit(LottoPayment payment) {
-        return Math.round(getTotalPrice() / (double) payment.getMoney());
+        return payment.calculateProfit(getTotalPrice());
     }
 
     public Map<LottoResult, Long> getResult() {
-        return result;
+        Map<LottoResult, Long> resultWithEmptyWin = new LinkedHashMap<>();
+        Arrays.stream(LottoResult.values())
+                .forEach(lottoResult -> resultWithEmptyWin.put(lottoResult, 0L));
+        resultWithEmptyWin.putAll(result);
+        return resultWithEmptyWin;
     }
 
     private Long getTotalPrice() {

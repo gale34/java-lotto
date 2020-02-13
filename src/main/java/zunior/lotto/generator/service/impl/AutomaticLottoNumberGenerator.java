@@ -24,7 +24,7 @@ public class AutomaticLottoNumberGenerator implements LottoNumberGenerator {
     @Override
     public List<Integer> generate() {
         Collections.shuffle(lottoNumbers);
-        return IntStream.rangeClosed(0, LOTTO_NUMBER_SIZE)
+        return IntStream.range(0, LOTTO_NUMBER_SIZE)
                 .map(i -> lottoNumbers.get(i))
                 .boxed()
                 .collect(Collectors.toList());
