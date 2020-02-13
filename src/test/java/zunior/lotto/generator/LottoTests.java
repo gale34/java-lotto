@@ -48,13 +48,13 @@ public class LottoTests {
         LottoNumberGenerator lottoNumberGenerator = mock(LottoNumberGenerator.class);
         given(lottoNumberGenerator.generate()).willReturn(lottoNumbers);
 
-        LottoTicket lottoTicket = new LottoTicket(lottoNumberGenerator);
+        LottoTicket lottoTicket = LottoTicket.create(lottoNumberGenerator);
         LottoResult actualResult = lottoTicket.check(winNumbers);
         assertThat(actualResult).isEqualTo(lottoResult);
     }
 
     private List<Integer> lottoNumbers(LottoNumberGenerator lottoNumberGenerator) {
-        LottoTicket lottoTicket = new LottoTicket(lottoNumberGenerator);
+        LottoTicket lottoTicket = LottoTicket.create(lottoNumberGenerator);
         return lottoTicket.getNumbers();
     }
 
