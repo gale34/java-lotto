@@ -6,7 +6,6 @@ import zunior.lotto.generator.model.LottoResults;
 import zunior.lotto.generator.model.LottoTickets;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 public class OutputConsoleView {

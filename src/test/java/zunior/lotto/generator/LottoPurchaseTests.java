@@ -5,8 +5,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import zunior.lotto.generator.model.LottoTickets;
 import zunior.lotto.generator.model.LottoPayment;
+import zunior.lotto.generator.model.LottoTickets;
 import zunior.lotto.generator.service.impl.AutomaticLottoNumberGenerator;
 
 import static org.assertj.core.api.Assertions.assertThat;

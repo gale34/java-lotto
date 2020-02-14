@@ -13,7 +13,7 @@ public class LottoPayment {
     }
 
     private static void validate(Integer money) {
-        if(money == null || money < 0) {
+        if (money == null || money < 0) {
             throw new RuntimeException("구매 금액이 적합하지 않습니다.");
         }
     }

@@ -6,11 +6,9 @@ import zunior.lotto.generator.service.impl.AutomaticLottoNumberGenerator;
 import zunior.lotto.generator.view.InputView;
 import zunior.lotto.generator.view.OutputConsoleView;
 
-import java.util.Collections;
 import java.util.List;
 
 import static zunior.lotto.generator.utils.LottoUtil.convertToIntegerList;
-import static zunior.lotto.generator.view.OutputConsoleView.printLottoResults;
 
 public class Main {
 
