@@ -14,7 +14,7 @@ public class LottoUtil {
     public static List<Integer> convertToIntegerList(String line) {
         String[] separateLine = separateLineWithComma(line);
         return Arrays.stream(separateLine)
-                .mapToInt(number -> Integer.parseInt(number))
+                .mapToInt(Integer::parseInt)
                 .boxed()
                 .collect(Collectors.toList());
     }

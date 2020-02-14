@@ -18,14 +18,14 @@ public class LottoTicket {
         return new LottoTicket(lottoNumberGenerator);
     }
 
-    public LottoResult check(List<Integer> winNumbers) {
-        int matchCount = Math.toIntExact(matchWithWinNumbers(winNumbers));
+    public LottoResult check(List<Integer> winningNumbers) {
+        int matchCount = Math.toIntExact(matchWinningNumbers(winningNumbers));
         return LottoResult.of(matchCount);
     }
 
-    private long matchWithWinNumbers(List<Integer> winNumbers) {
+    private long matchWinningNumbers(List<Integer> winningNumbers) {
         return lottoNumbers.stream()
-                .filter(number -> winNumbers.contains(number))
+                .filter(number -> winningNumbers.contains(number))
                 .count();
     }
 

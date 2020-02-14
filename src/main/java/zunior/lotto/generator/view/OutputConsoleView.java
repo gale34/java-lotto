@@ -13,8 +13,7 @@ public class OutputConsoleView {
 
     public static void printLottoTickets(LottoTickets lottoTickets) {
         System.out.println(lottoTickets.getTicketCount() + "개를 구매했습니다.");
-        List<Integer[]> test = lottoTickets.getLottoNumbers();
-        test
+        lottoTickets.getLottoNumbers()
                 .stream()
                 .forEach(numbers -> System.out.println(Arrays.deepToString(numbers)));
         System.out.println();

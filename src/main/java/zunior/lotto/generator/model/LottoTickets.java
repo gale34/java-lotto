@@ -22,13 +22,12 @@ public class LottoTickets {
         for (int i = 0; i < ticketCount; i++) {
             tickets.add(LottoTicket.create(lottoNumberGenerator));
         }
-
         return new LottoTickets(tickets);
     }
 
-    public LottoResults checkAll(List<Integer> winNumbers) {
+    public LottoResults checkAll(List<Integer> winningNumbers) {
         List<LottoResult> lottoResults = tickets.stream()
-                .map(lottoTicket -> lottoTicket.check(winNumbers))
+                .map(lottoTicket -> lottoTicket.check(winningNumbers))
                 .collect(Collectors.toList());
         return LottoResults.create(lottoResults);
     }

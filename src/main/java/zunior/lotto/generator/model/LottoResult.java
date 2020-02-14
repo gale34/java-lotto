@@ -35,6 +35,6 @@ public enum LottoResult {
         return Arrays.stream(LottoResult.values())
                 .filter(lottoResult -> lottoResult.hasCount(count))
                 .findAny()
-                .orElseThrow(() -> new RuntimeException("비정상적인 결과입니다. 당첨 갯수가 6개보다 많을 수 없습니다!"));
+                .orElseThrow(() -> new RuntimeException("비정상적인 결과입니다. 당첨 갯수가 0보다 작거나 6개보다 많을 수 없습니다!"));
     }
 }

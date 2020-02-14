@@ -45,12 +45,12 @@ public class LottoTests {
     @ParameterizedTest
     @MethodSource("lottoWinTestStream")
     @ExtendWith(MockitoExtension.class)
-    public void lottoWinTest(List<Integer> winNumbers, List<Integer> lottoNumbers, LottoResult lottoResult) {
+    public void lottoWinTest(List<Integer> winningNumbers, List<Integer> lottoNumbers, LottoResult lottoResult) {
         LottoNumberGenerator lottoNumberGenerator = mock(LottoNumberGenerator.class);
         given(lottoNumberGenerator.generate()).willReturn(lottoNumbers);
 
         LottoTicket lottoTicket = LottoTicket.create(lottoNumberGenerator);
-        LottoResult actualResult = lottoTicket.check(winNumbers);
+        LottoResult actualResult = lottoTicket.check(winningNumbers);
         assertThat(actualResult).isEqualTo(lottoResult);
     }
 

@@ -35,9 +35,9 @@ public class Main {
     }
 
     private static void showResult(LottoPayment lottoPayment, LottoTickets lottoTickets) {
-        String winNumberString = InputView.inputWinningNumber();
-        List<Integer> winNumbers = convertToIntegerList(winNumberString);
-        LottoResults lottoResults = lottoTickets.checkAll(winNumbers);
+        String winningNumberString = InputView.inputWinningNumber();
+        List<Integer> winningNumbers = convertToIntegerList(winningNumberString);
+        LottoResults lottoResults = lottoTickets.checkAll(winningNumbers);
         printLottoResults(lottoResults, lottoPayment);
     }
 }
