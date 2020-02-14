@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 @DisplayName("로또 구입 테스트")
-public class LottoTicketsTests {
+public class LottoPurchaseTests {
 
     @DisplayName("정상 구매")
     @ParameterizedTest(name = "구입 금액 : {0}. 구입한 로또 갯수 : {1}")

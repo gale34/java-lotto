@@ -23,6 +23,6 @@ public class LottoPayment {
     }
 
     public Long calculateProfit(Long totalPrice) {
-        return Math.round(totalPrice / (double) money) * 100;
+        return Math.round(totalPrice * 100 / (double) money);
     }
 }
