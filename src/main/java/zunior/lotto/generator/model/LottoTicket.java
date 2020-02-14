@@ -5,12 +5,15 @@ import zunior.lotto.generator.service.LottoNumberGenerator;
 import java.util.Collections;
 import java.util.List;
 
+import static zunior.lotto.generator.utils.LottoUtil.validateLottoNumber;
+
 public class LottoTicket {
 
     private final List<Integer> lottoNumbers;
 
     private LottoTicket(LottoNumberGenerator lottoNumberGenerator) {
         this.lottoNumbers = lottoNumberGenerator.generate();
+        validateLottoNumber(this.lottoNumbers);
         Collections.sort(this.lottoNumbers);
     }
 

@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static zunior.lotto.generator.utils.LottoConstant.LOTTO_NUMBER_SIZE;
+import static zunior.lotto.generator.utils.LottoUtil.validateLottoNumber;
+
 public class LottoTickets {
 
     private final List<LottoTicket> tickets;
@@ -26,6 +29,7 @@ public class LottoTickets {
     }
 
     public LottoResults checkAll(List<Integer> winningNumbers) {
+        validateLottoNumber(winningNumbers);
         List<LottoResult> lottoResults = tickets.stream()
                 .map(lottoTicket -> lottoTicket.check(winningNumbers))
                 .collect(Collectors.toList());

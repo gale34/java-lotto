@@ -38,6 +38,6 @@ public class Main {
         String winningNumberString = InputView.inputWinningNumber();
         List<Integer> winningNumbers = convertToIntegerList(winningNumberString);
         LottoResults lottoResults = lottoTickets.checkAll(winningNumbers);
-        printLottoResults(lottoResults, lottoPayment);
+        OutputConsoleView.printLottoResults(lottoResults, lottoPayment);
     }
 }

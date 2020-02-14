@@ -7,11 +7,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class AutomaticLottoNumberGenerator implements LottoNumberGenerator {
+import static zunior.lotto.generator.utils.LottoConstant.*;
 
-    private static final Integer LOTTO_MIN_NUMBER = 1;
-    private static final Integer LOTTO_MAX_NUMBER = 45;
-    private static final Integer LOTTO_NUMBER_SIZE = 6;
+public class AutomaticLottoNumberGenerator implements LottoNumberGenerator {
 
     private static List<Integer> lottoNumbers;
 
