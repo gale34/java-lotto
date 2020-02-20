@@ -1,20 +1,22 @@
 package zunior.lotto.generator.model;
 
+import zunior.lotto.generator.exception.PaymentException;
+
 public class LottoPayment {
     private final Integer money;
 
     private LottoPayment(int money) {
+        validate(money);
         this.money = money;
     }
 
     public static LottoPayment of(Integer money) {
-        validate(money);
         return new LottoPayment(money);
     }
 
     private static void validate(Integer money) {
         if (money == null || money < 0) {
-            throw new RuntimeException("구매 금액이 적합하지 않습니다.");
+            throw new PaymentException("구매 금액이 적합하지 않습니다.");
         }
     }
 

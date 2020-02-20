@@ -6,7 +6,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import zunior.lotto.generator.model.LottoPayment;
-import zunior.lotto.generator.model.LottoTickets;
+import zunior.lotto.generator.model.PurchaseLottoTickets;
 import zunior.lotto.generator.service.impl.AutomaticLottoNumberGenerator;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,8 +20,8 @@ public class LottoPurchaseTests {
     @CsvSource({"14000, 14", "1000, 1", "600, 0", "2500, 2"})
     public void purchaseTest(int cost, int lottoCount) {
         LottoPayment lottoPayment = LottoPayment.of(cost);
-        LottoTickets lottoTickets = LottoTickets.create(lottoPayment, new AutomaticLottoNumberGenerator());
-        assertThat(lottoTickets.getTicketCount()).isEqualTo(lottoCount);
+        PurchaseLottoTickets purchaseLottoTickets = PurchaseLottoTickets.create(lottoPayment, new AutomaticLottoNumberGenerator());
+        assertThat(purchaseLottoTickets.getTicketCount()).isEqualTo(lottoCount);
     }
 
     @DisplayName("비정상 금액(null, 음수) 지불")

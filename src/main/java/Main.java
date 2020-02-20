@@ -1,6 +1,7 @@
 import zunior.lotto.generator.model.LottoPayment;
 import zunior.lotto.generator.model.LottoResults;
-import zunior.lotto.generator.model.LottoTickets;
+import zunior.lotto.generator.model.PurchaseLottoTickets;
+import zunior.lotto.generator.model.WinningLottoTicket;
 import zunior.lotto.generator.service.LottoNumberGenerator;
 import zunior.lotto.generator.service.impl.AutomaticLottoNumberGenerator;
 import zunior.lotto.generator.view.InputView;
@@ -15,9 +16,9 @@ public class Main {
     public static void main(String[] args) {
         LottoPayment lottoPayment = inputLottoPayment();
 
-        LottoTickets lottoTickets = showLottoTickets(lottoPayment);
+        PurchaseLottoTickets purchaseLottoTickets = showLottoTickets(lottoPayment);
 
-        showResult(lottoPayment, lottoTickets);
+        showResult(lottoPayment, purchaseLottoTickets);
     }
 
     private static LottoPayment inputLottoPayment() {
@@ -25,17 +26,17 @@ public class Main {
         return LottoPayment.of(money);
     }
 
-    private static LottoTickets showLottoTickets(LottoPayment lottoPayment) {
+    private static PurchaseLottoTickets showLottoTickets(LottoPayment lottoPayment) {
         LottoNumberGenerator lottoNumberGenerator = new AutomaticLottoNumberGenerator();
-        LottoTickets lottoTickets = LottoTickets.create(lottoPayment, lottoNumberGenerator);
-        OutputConsoleView.printLottoTickets(lottoTickets);
-        return lottoTickets;
+        PurchaseLottoTickets purchaseLottoTickets = PurchaseLottoTickets.create(lottoPayment, lottoNumberGenerator);
+        OutputConsoleView.printLottoTickets(purchaseLottoTickets);
+        return purchaseLottoTickets;
     }
 
-    private static void showResult(LottoPayment lottoPayment, LottoTickets lottoTickets) {
+    private static void showResult(LottoPayment lottoPayment, PurchaseLottoTickets purchaseLottoTickets) {
         String winningNumberString = InputView.inputWinningNumber();
         List<Integer> winningNumbers = convertToIntegerList(winningNumberString);
-        LottoResults lottoResults = lottoTickets.checkAll(winningNumbers);
+        LottoResults lottoResults = purchaseLottoTickets.checkAll(WinningLottoTicket.create(winningNumbers));
         OutputConsoleView.printLottoResults(lottoResults, lottoPayment);
     }
 }

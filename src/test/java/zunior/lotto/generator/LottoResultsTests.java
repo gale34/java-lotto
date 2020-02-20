@@ -27,7 +27,7 @@ public class LottoResultsTests {
         Map<LottoResult, Long> result = lottoResults.getResult();
         Integer[] actual = result.keySet()
                 .stream()
-                .filter(lottoResult -> !lottoResult.equals(LottoResult.BLANK))
+                .filter(lottoResult -> !lottoResult.isBlank())
                 .map(lottoResult -> Math.toIntExact(result.get(lottoResult)))
                 .toArray(Integer[]::new);
 
@@ -44,8 +44,8 @@ public class LottoResultsTests {
 
     private static Stream gameResultsTest() {
         return Stream.of(
-                Arguments.of(Arrays.asList(LottoResult.BLANK, LottoResult.BLANK, LottoResult.BLANK), new Integer[]{0, 0, 0, 0}),
-                Arguments.of(Arrays.asList(LottoResult.THREE, LottoResult.FIVE, LottoResult.BLANK), new Integer[]{1, 0, 1, 0}),
+                Arguments.of(Arrays.asList(LottoResult.ONE, LottoResult.ZERO, LottoResult.TWO), new Integer[]{0, 0, 0, 0}),
+                Arguments.of(Arrays.asList(LottoResult.THREE, LottoResult.FIVE, LottoResult.ONE), new Integer[]{1, 0, 1, 0}),
                 Arguments.of(Arrays.asList(LottoResult.FOUR, LottoResult.FIVE, LottoResult.SIX), new Integer[]{0, 1, 1, 1}),
                 Arguments.of(Arrays.asList(LottoResult.SIX, LottoResult.SIX, LottoResult.SIX), new Integer[]{0, 0, 0, 3})
         );

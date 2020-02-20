@@ -3,16 +3,16 @@ package zunior.lotto.generator.view;
 import zunior.lotto.generator.model.LottoPayment;
 import zunior.lotto.generator.model.LottoResult;
 import zunior.lotto.generator.model.LottoResults;
-import zunior.lotto.generator.model.LottoTickets;
+import zunior.lotto.generator.model.PurchaseLottoTickets;
 
 import java.util.Arrays;
 import java.util.Map;
 
 public class OutputConsoleView {
 
-    public static void printLottoTickets(LottoTickets lottoTickets) {
-        System.out.println(lottoTickets.getTicketCount() + "개를 구매했습니다.");
-        lottoTickets.getLottoNumbers()
+    public static void printLottoTickets(PurchaseLottoTickets purchaseLottoTickets) {
+        System.out.println(purchaseLottoTickets.getTicketCount() + "개를 구매했습니다.");
+        purchaseLottoTickets.getLottoNumbers()
                 .stream()
                 .forEach(numbers -> System.out.println(Arrays.deepToString(numbers)));
         System.out.println();
@@ -24,17 +24,16 @@ public class OutputConsoleView {
         Map<LottoResult, Long> result = lottoResults.getResult();
         result.keySet()
                 .stream()
-                .filter(lottoResult -> !lottoResult.equals(LottoResult.BLANK))
+                .filter(lottoResult -> !lottoResult.isBlank())
                 .forEach(lottoResult -> printWinResult(result, lottoResult));
         System.out.println("총 수익률은 " + lottoResults.getProfit(payment) + "%입니다.");
     }
 
     private static void printWinResult(Map<LottoResult, Long> result, LottoResult lottoResult) {
-        System.out.println(lottoResult.getMatchCount()
-                + "개 일치 ("
-                + lottoResult.getPrice()
-                + ") - "
-                + result.get(lottoResult)
-                + "개");
+        System.out.println(String.format(
+                "%d개 일치 (%d원) - %d개",
+                lottoResult.getMatchCount(),
+                lottoResult.getPrice(),
+                result.get(lottoResult)));
     }
 }
