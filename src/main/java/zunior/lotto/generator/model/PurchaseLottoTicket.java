@@ -12,9 +12,9 @@ public class PurchaseLottoTicket extends LottoTicket {
         return new PurchaseLottoTicket(numbers);
     }
 
-    public LottoResult check(WinningLottoTicket winningNumbers) {
+    public LottoResult check(WinningLottoTicket winningNumbers, Integer bonusNumber) {
         int matchCount = Math.toIntExact(matchWinningNumbers(winningNumbers));
-        return LottoResult.of(matchCount);
+        return LottoResult.of(matchCount, containBonusNumber(bonusNumber));
     }
 
     private long matchWinningNumbers(WinningLottoTicket winningNumbers) {
@@ -22,4 +22,9 @@ public class PurchaseLottoTicket extends LottoTicket {
                 .filter(winningNumbers::contains)
                 .count();
     }
+
+    private boolean containBonusNumber(Integer bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
+
 }

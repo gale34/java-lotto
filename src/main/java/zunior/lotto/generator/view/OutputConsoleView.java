@@ -10,6 +10,9 @@ import java.util.Map;
 
 public class OutputConsoleView {
 
+    private static final String resultFormat = "%d개 일치 (%d원) - %d개";
+    private static final String bonusResultFormat = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
+
     public static void printLottoTickets(PurchaseLottoTickets purchaseLottoTickets) {
         System.out.println(purchaseLottoTickets.getTicketCount() + "개를 구매했습니다.");
         purchaseLottoTickets.getLottoNumbers()
@@ -30,8 +33,10 @@ public class OutputConsoleView {
     }
 
     private static void printWinResult(Map<LottoResult, Long> result, LottoResult lottoResult) {
+        String stringFormat = lottoResult == LottoResult.FIVE_WITH_BONUS ? bonusResultFormat : resultFormat;
+
         System.out.println(String.format(
-                "%d개 일치 (%d원) - %d개",
+                stringFormat,
                 lottoResult.getMatchCount(),
                 lottoResult.getPrice(),
                 result.get(lottoResult)));

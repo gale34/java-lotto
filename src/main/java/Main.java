@@ -35,8 +35,10 @@ public class Main {
 
     private static void showResult(LottoPayment lottoPayment, PurchaseLottoTickets purchaseLottoTickets) {
         String winningNumberString = InputView.inputWinningNumber();
+        Integer bonusNumber = InputView.inputBonusNumber();
+
         List<Integer> winningNumbers = convertToIntegerList(winningNumberString);
-        LottoResults lottoResults = purchaseLottoTickets.checkAll(WinningLottoTicket.create(winningNumbers));
+        LottoResults lottoResults = purchaseLottoTickets.checkAll(WinningLottoTicket.create(winningNumbers), bonusNumber);
         OutputConsoleView.printLottoResults(lottoResults, lottoPayment);
     }
 }

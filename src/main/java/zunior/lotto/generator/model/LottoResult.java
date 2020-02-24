@@ -10,6 +10,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static zunior.lotto.generator.utils.LottoConstant.LOTTO_MATCH_COUNT_FOR_BONUS_NUMBER;
+
 public enum LottoResult {
     ZERO(0, 0),
     ONE(1, 0),
@@ -17,6 +19,7 @@ public enum LottoResult {
     THREE(3, 5000),
     FOUR(4, 50000),
     FIVE(5, 1500000),
+    FIVE_WITH_BONUS(5, 3000000),
     SIX(6, 2000000000);
 
     private final Integer matchCount;
@@ -24,6 +27,7 @@ public enum LottoResult {
 
     private static final Map<Integer, LottoResult> lottoResults = Collections.unmodifiableMap(
             Stream.of(values())
+                    .filter(lottoResult -> lottoResult == FIVE_WITH_BONUS)
                     .collect(Collectors.toMap(LottoResult::getMatchCount, Function.identity())));
 
     LottoResult(final Integer matchCount, final Integer price) {
@@ -43,7 +47,11 @@ public enum LottoResult {
         return price;
     }
 
-    public static LottoResult of(int count) {
+    public static LottoResult of(int count, boolean hasBonusNumber) {
+        if(count == LOTTO_MATCH_COUNT_FOR_BONUS_NUMBER && hasBonusNumber) {
+            return FIVE_WITH_BONUS;
+        }
+
         return Optional.ofNullable(lottoResults.get(count))
                 .orElseThrow(() -> new LottoResultException("비정상적인 결과입니다. 당첨 갯수가 0보다 작거나 6개보다 많을 수 없습니다!"));
     }
