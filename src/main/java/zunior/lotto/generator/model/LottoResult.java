@@ -2,7 +2,6 @@ package zunior.lotto.generator.model;
 
 import zunior.lotto.generator.exception.LottoResultException;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
@@ -27,7 +26,7 @@ public enum LottoResult {
 
     private static final Map<Integer, LottoResult> lottoResults = Collections.unmodifiableMap(
             Stream.of(values())
-                    .filter(lottoResult -> lottoResult == FIVE_WITH_BONUS)
+                    .filter(lottoResult -> lottoResult != FIVE_WITH_BONUS)
                     .collect(Collectors.toMap(LottoResult::getMatchCount, Function.identity())));
 
     LottoResult(final Integer matchCount, final Integer price) {

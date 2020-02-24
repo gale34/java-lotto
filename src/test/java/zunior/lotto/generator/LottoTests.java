@@ -8,11 +8,10 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.junit.jupiter.MockitoExtension;
 import zunior.lotto.generator.model.LottoResult;
-import zunior.lotto.generator.model.LottoTicket;
 import zunior.lotto.generator.model.PurchaseLottoTicket;
 import zunior.lotto.generator.model.WinningLottoTicket;
-import zunior.lotto.generator.service.impl.AutomaticLottoNumberGenerator;
 import zunior.lotto.generator.service.LottoNumberGenerator;
+import zunior.lotto.generator.service.impl.AutomaticLottoNumberGenerator;
 
 import java.util.Arrays;
 import java.util.List;
@@ -43,12 +42,12 @@ public class LottoTests {
     @ParameterizedTest
     @MethodSource("lottoWinTestStream")
     @ExtendWith(MockitoExtension.class)
-    public void lottoWinTest(List<Integer> winningNumbers, List<Integer> lottoNumbers, LottoResult lottoResult) {
+    public void lottoWinTest(List<Integer> winningNumbers, Integer bonusNumber, List<Integer> lottoNumbers, LottoResult lottoResult) {
         LottoNumberGenerator lottoNumberGenerator = mock(LottoNumberGenerator.class);
         given(lottoNumberGenerator.generate()).willReturn(lottoNumbers);
 
         PurchaseLottoTicket lottoTicket = PurchaseLottoTicket.create(lottoNumberGenerator.generate());
-        LottoResult actualResult = lottoTicket.check(WinningLottoTicket.create(winningNumbers));
+        LottoResult actualResult = lottoTicket.check(WinningLottoTicket.create(winningNumbers), bonusNumber);
         assertThat(actualResult).isEqualTo(lottoResult);
     }
 
@@ -59,10 +58,12 @@ public class LottoTests {
 
     private static Stream lottoWinTestStream() {
         return Stream.of(
-                Arguments.of(Arrays.asList(1,2,3,4,5,6), Arrays.asList(3,4,5,6,7,8), LottoResult.FOUR),
-                Arguments.of(Arrays.asList(6,7,12,22,26,36), Arrays.asList(4,9,12,22,26,41), LottoResult.THREE),
-                Arguments.of(Arrays.asList(5,12,25,26,38,45), Arrays.asList(5,12,25,26,38,45), LottoResult.SIX),
-                Arguments.of(Arrays.asList(5,12,25,26,38,45), Arrays.asList(15,16,17,18,19,20), LottoResult.ZERO)
+                Arguments.of(Arrays.asList(1,2,3,4,5,6), 45, Arrays.asList(3,4,5,6,7,8), LottoResult.FOUR),
+                Arguments.of(Arrays.asList(6,7,12,22,26,36), 45, Arrays.asList(4,9,12,22,26,41), LottoResult.THREE),
+                Arguments.of(Arrays.asList(5,12,25,26,38,45), 42, Arrays.asList(5,12,25,26,38,45), LottoResult.SIX),
+                Arguments.of(Arrays.asList(5,12,25,26,38,45), 42, Arrays.asList(15,16,17,18,19,20), LottoResult.ZERO),
+                Arguments.of(Arrays.asList(5,12,25,26,38,45), 42, Arrays.asList(15,16,17,18,19,20), LottoResult.ZERO),
+                Arguments.of(Arrays.asList(1,2,3,4,5,6), 7, Arrays.asList(1,2,3,4,5,7), LottoResult.FIVE_WITH_BONUS)
         );
     }
 

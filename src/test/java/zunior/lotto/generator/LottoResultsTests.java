@@ -44,10 +44,13 @@ public class LottoResultsTests {
 
     private static Stream gameResultsTest() {
         return Stream.of(
-                Arguments.of(Arrays.asList(LottoResult.ONE, LottoResult.ZERO, LottoResult.TWO), new Integer[]{0, 0, 0, 0}),
-                Arguments.of(Arrays.asList(LottoResult.THREE, LottoResult.FIVE, LottoResult.ONE), new Integer[]{1, 0, 1, 0}),
-                Arguments.of(Arrays.asList(LottoResult.FOUR, LottoResult.FIVE, LottoResult.SIX), new Integer[]{0, 1, 1, 1}),
-                Arguments.of(Arrays.asList(LottoResult.SIX, LottoResult.SIX, LottoResult.SIX), new Integer[]{0, 0, 0, 3})
+                // 두번쨰 Array는 5등, 4등, 3등, 2등, 1등 갯수 array.
+                Arguments.of(Arrays.asList(LottoResult.ONE, LottoResult.ZERO, LottoResult.TWO), new Integer[]{0, 0, 0, 0, 0}),
+                Arguments.of(Arrays.asList(LottoResult.THREE, LottoResult.FIVE, LottoResult.ONE), new Integer[]{1, 0, 1, 0, 0}),
+                Arguments.of(Arrays.asList(LottoResult.FOUR, LottoResult.FIVE, LottoResult.SIX), new Integer[]{0, 1, 1, 0, 1}),
+                Arguments.of(Arrays.asList(LottoResult.SIX, LottoResult.SIX, LottoResult.SIX), new Integer[]{0, 0, 0, 0, 3}),
+                Arguments.of(Arrays.asList(LottoResult.SIX, LottoResult.FIVE_WITH_BONUS, LottoResult.FIVE), new Integer[]{0, 0, 1, 1, 1}),
+                Arguments.of(Arrays.asList(LottoResult.FIVE_WITH_BONUS, LottoResult.ONE, LottoResult.ZERO), new Integer[]{0, 0, 0, 1, 0})
         );
     }
 }
