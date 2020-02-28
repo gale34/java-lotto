@@ -38,7 +38,7 @@ public class Main {
         Integer bonusNumber = InputView.inputBonusNumber();
 
         List<Integer> winningNumbers = convertToIntegerList(winningNumberString);
-        LottoResults lottoResults = purchaseLottoTickets.checkAll(WinningLottoTicket.create(winningNumbers), bonusNumber);
+        LottoResults lottoResults = purchaseLottoTickets.checkAll(WinningLottoTicket.create(winningNumbers, bonusNumber));
         OutputConsoleView.printLottoResults(lottoResults, lottoPayment);
     }
 }

@@ -27,9 +27,9 @@ public class PurchaseLottoTickets {
         return new PurchaseLottoTickets(tickets);
     }
 
-    public LottoResults checkAll(WinningLottoTicket winningNumbers, Integer bonusNumber) {
+    public LottoResults checkAll(WinningLottoTicket winningNumbers) {
         List<LottoResult> lottoResults = tickets.stream()
-                .map(lottoTicket -> lottoTicket.check(winningNumbers, bonusNumber))
+                .map(lottoTicket -> lottoTicket.check(winningNumbers))
                 .collect(Collectors.toList());
         return LottoResults.create(lottoResults);
     }

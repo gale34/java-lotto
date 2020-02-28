@@ -12,9 +12,9 @@ public class PurchaseLottoTicket extends LottoTicket {
         return new PurchaseLottoTicket(numbers);
     }
 
-    public LottoResult check(WinningLottoTicket winningNumbers, Integer bonusNumber) {
+    public LottoResult check(WinningLottoTicket winningNumbers) {
         int matchCount = Math.toIntExact(matchWinningNumbers(winningNumbers));
-        return LottoResult.of(matchCount, containBonusNumber(bonusNumber));
+        return LottoResult.of(matchCount, containBonusNumber(winningNumbers.getBonusNumber()));
     }
 
     private long matchWinningNumbers(WinningLottoTicket winningNumbers) {

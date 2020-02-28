@@ -47,7 +47,7 @@ public class LottoTests {
         given(lottoNumberGenerator.generate()).willReturn(lottoNumbers);
 
         PurchaseLottoTicket lottoTicket = PurchaseLottoTicket.create(lottoNumberGenerator.generate());
-        LottoResult actualResult = lottoTicket.check(WinningLottoTicket.create(winningNumbers), bonusNumber);
+        LottoResult actualResult = lottoTicket.check(WinningLottoTicket.create(winningNumbers,bonusNumber));
         assertThat(actualResult).isEqualTo(lottoResult);
     }
 
