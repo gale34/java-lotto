@@ -4,8 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static zunior.lotto.generator.utils.LottoConstant.*;
-
 public class LottoUtil {
     private static final String COMMA_DELIMITER = ",";
 

@@ -14,7 +14,7 @@ public class PurchaseLottoTicket extends LottoTicket {
 
     public LottoResult check(WinningLottoTicket winningNumbers) {
         int matchCount = Math.toIntExact(matchWinningNumbers(winningNumbers));
-        return LottoResult.of(matchCount);
+        return LottoResult.of(matchCount, containBonusNumber(winningNumbers.getBonusNumber()));
     }
 
     private long matchWinningNumbers(WinningLottoTicket winningNumbers) {
@@ -22,4 +22,9 @@ public class PurchaseLottoTicket extends LottoTicket {
                 .filter(winningNumbers::contains)
                 .count();
     }
+
+    private boolean containBonusNumber(Integer bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
+
 }

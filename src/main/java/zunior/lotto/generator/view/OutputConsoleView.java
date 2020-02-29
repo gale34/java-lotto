@@ -10,6 +10,9 @@ import java.util.Map;
 
 public class OutputConsoleView {
 
+    private static final String RESULT_FORMAT = "%d개 일치 (%d원) - %d개";
+    private static final String BONUS_RESULT_FORMAT = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
+
     public static void printLottoTickets(PurchaseLottoTickets purchaseLottoTickets) {
         System.out.println(purchaseLottoTickets.getTicketCount() + "개를 구매했습니다.");
         purchaseLottoTickets.getLottoNumbers()
@@ -25,15 +28,24 @@ public class OutputConsoleView {
         result.keySet()
                 .stream()
                 .filter(lottoResult -> !lottoResult.isBlank())
-                .forEach(lottoResult -> printWinResult(result, lottoResult));
+                .forEach(lottoResult -> printWinResult(result.get(lottoResult), lottoResult));
         System.out.println("총 수익률은 " + lottoResults.getProfit(payment) + "%입니다.");
     }
 
-    private static void printWinResult(Map<LottoResult, Long> result, LottoResult lottoResult) {
+    private static void printWinResult(Long resultCount, LottoResult lottoResult) {
+        String stringFormat = getResultStringFormat(lottoResult);
+
         System.out.println(String.format(
-                "%d개 일치 (%d원) - %d개",
+                stringFormat,
                 lottoResult.getMatchCount(),
                 lottoResult.getPrice(),
-                result.get(lottoResult)));
+                resultCount));
+    }
+
+    private static String getResultStringFormat(LottoResult lottoResult) {
+        if (lottoResult.getBonusMatched()) {
+            return BONUS_RESULT_FORMAT;
+        }
+        return RESULT_FORMAT;
     }
 }
