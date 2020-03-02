@@ -4,17 +4,24 @@ import java.util.List;
 
 public class PurchaseLottoTicket extends LottoTicket {
 
-    protected PurchaseLottoTicket(List<Integer> numbers) {
+    private LottoType lottoType;
+
+    protected PurchaseLottoTicket(List<Integer> numbers, LottoType lottoType) {
         super(numbers);
+        this.lottoType = lottoType;
     }
 
-    public static PurchaseLottoTicket create(List<Integer> numbers) {
-        return new PurchaseLottoTicket(numbers);
+    public static PurchaseLottoTicket create(List<Integer> numbers, LottoType lottoType) {
+        return new PurchaseLottoTicket(numbers, lottoType);
     }
 
     public LottoResult check(WinningLottoTicket winningNumbers) {
         int matchCount = Math.toIntExact(matchWinningNumbers(winningNumbers));
         return LottoResult.of(matchCount, containBonusNumber(winningNumbers.getBonusNumber()));
+    }
+
+    public LottoType getLottoType() {
+        return lottoType;
     }
 
     private long matchWinningNumbers(WinningLottoTicket winningNumbers) {

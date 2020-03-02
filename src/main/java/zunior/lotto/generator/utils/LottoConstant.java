@@ -6,4 +6,6 @@ public class LottoConstant {
     public static final Integer LOTTO_NUMBER_SIZE = 6;
 
     public static final Integer LOTTO_WINNING_NUMBER_WITH_BONUS_FIVE = 5;
+
+    public static final Integer LOTTO_TICKET_PRICE = 1000;
 }

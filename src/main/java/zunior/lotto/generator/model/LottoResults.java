@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import static zunior.lotto.generator.utils.LottoConstant.LOTTO_TICKET_PRICE;
+
 public class LottoResults {
     private final Map<LottoResult, Long> result;
 
@@ -20,16 +22,21 @@ public class LottoResults {
         return new LottoResults(result);
     }
 
-    public Long getProfit(LottoPayment payment) {
-        return payment.calculateProfit(getTotalPrice());
-    }
-
-    public Map<LottoResult, Long> getResult() {
+    private static Map<LottoResult, Long> getDefaultResult() {
         Map<LottoResult, Long> resultWithEmptyWin = new LinkedHashMap<>();
         Arrays.stream(LottoResult.values())
                 .forEach(lottoResult -> resultWithEmptyWin.put(lottoResult, 0L));
-        resultWithEmptyWin.putAll(result);
         return resultWithEmptyWin;
+    }
+
+    public Long getProfit() {
+        return Math.round(getTotalPrice() * 100 / getPurchaseAmount());
+    }
+
+    public Map<LottoResult, Long> getResult() {
+        Map<LottoResult, Long> result = getDefaultResult();
+        result.putAll(this.result);
+        return result;
     }
 
     private Long getTotalPrice() {
@@ -37,5 +44,12 @@ public class LottoResults {
                 .stream()
                 .mapToLong(lottoResult -> lottoResult.getPrice() * result.get(lottoResult))
                 .sum();
+    }
+
+    private double getPurchaseAmount() {
+        return (double) result.keySet()
+                .stream()
+                .mapToLong(key -> result.getOrDefault(key, 0L))
+                .sum() * LOTTO_TICKET_PRICE;
     }
 }

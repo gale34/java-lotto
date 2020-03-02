@@ -3,9 +3,7 @@ package zunior.lotto.generator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
-import zunior.lotto.generator.model.LottoPayment;
 import zunior.lotto.generator.model.LottoResult;
 import zunior.lotto.generator.model.LottoResults;
 
@@ -34,13 +32,13 @@ public class LottoResultsTests {
         assertThat(actual).isEqualTo(expected);
     }
 
-    @DisplayName("수익률 테스트")
+    /*@DisplayName("수익률 테스트")
     @ParameterizedTest(name = "투자금 : {0}. 당첨 총 금액 : {1}. 결과 : {2}%")
     @CsvSource({"5000,5000,100", "1000, 50000, 5000", "10000, 5000, 50", "50000, 0, 0", "15000, 5000, 33"})
     public void profitTest(int investmentAmount, long price, int expectedProfit) {
         LottoPayment payment = LottoPayment.of(investmentAmount);
-        assertThat(payment.calculateProfit(price)).isEqualTo(expectedProfit);
-    }
+        assertThat(LottoR.calculateProfit(price)).isEqualTo(expectedProfit);
+    }*/
 
     private static Stream gameResultsTest() {
         return Stream.of(

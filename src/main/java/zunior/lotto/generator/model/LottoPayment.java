@@ -3,7 +3,7 @@ package zunior.lotto.generator.model;
 import zunior.lotto.generator.exception.PaymentException;
 
 public class LottoPayment {
-    private final Integer money;
+    private Integer money;
 
     private LottoPayment(int money) {
         validate(money);
@@ -20,11 +20,15 @@ public class LottoPayment {
         }
     }
 
-    public Integer getLottoTicketCount(Integer lottoTicketPrice) {
-        return money / lottoTicketPrice;
+    public void buyLottoTickets(Integer lottoCount, Integer lottoTicketPrice) {
+        money -= lottoCount * lottoTicketPrice;
+
+        if (money < 0) {
+            throw new PaymentException(lottoCount + "장 구입하기엔 돈이 부족합니다.");
+        }
     }
 
-    public Long calculateProfit(Long totalPrice) {
-        return Math.round(totalPrice * 100 / (double) money);
+    public Integer buyLottoTicketsWithMaximum(Integer lottoTicketPrice) {
+        return money / lottoTicketPrice;
     }
 }

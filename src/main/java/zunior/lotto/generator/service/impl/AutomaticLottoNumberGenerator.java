@@ -1,5 +1,6 @@
 package zunior.lotto.generator.service.impl;
 
+import zunior.lotto.generator.model.LottoType;
 import zunior.lotto.generator.service.LottoNumberGenerator;
 
 import java.util.Collections;
@@ -26,5 +27,10 @@ public class AutomaticLottoNumberGenerator implements LottoNumberGenerator {
                 .map(i -> lottoNumbers.get(i))
                 .boxed()
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public LottoType getLottoType() {
+        return LottoType.AUTOMATIC;
     }
 }

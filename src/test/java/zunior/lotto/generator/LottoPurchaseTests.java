@@ -21,7 +21,7 @@ public class LottoPurchaseTests {
     public void purchaseTest(int cost, int lottoCount) {
         LottoPayment lottoPayment = LottoPayment.of(cost);
         PurchaseLottoTickets purchaseLottoTickets = PurchaseLottoTickets.create(lottoPayment, new AutomaticLottoNumberGenerator());
-        assertThat(purchaseLottoTickets.getTicketCount()).isEqualTo(lottoCount);
+        assertThat(purchaseLottoTickets.getAllTicketCount()).isEqualTo(lottoCount);
     }
 
     @DisplayName("비정상 금액(null, 음수) 지불")
