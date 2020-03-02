@@ -14,12 +14,6 @@ public class LottoPayment {
         return new LottoPayment(money);
     }
 
-    private static void validate(Integer money) {
-        if (money == null || money < 0) {
-            throw new PaymentException("구매 금액이 적합하지 않습니다.");
-        }
-    }
-
     public void buyLottoTickets(Integer lottoCount, Integer lottoTicketPrice) {
         money -= lottoCount * lottoTicketPrice;
 
@@ -30,5 +24,11 @@ public class LottoPayment {
 
     public Integer buyLottoTicketsWithMaximum(Integer lottoTicketPrice) {
         return money / lottoTicketPrice;
+    }
+
+    private static void validate(Integer money) {
+        if (money == null || money < 0) {
+            throw new PaymentException("구매 금액이 적합하지 않습니다.");
+        }
     }
 }
