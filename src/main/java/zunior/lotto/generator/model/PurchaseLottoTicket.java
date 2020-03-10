@@ -1,18 +1,20 @@
 package zunior.lotto.generator.model;
 
+import zunior.lotto.generator.service.LottoNumberGenerator;
+
 import java.util.List;
 
 public class PurchaseLottoTicket extends LottoTicket {
 
     private LottoType lottoType;
 
-    protected PurchaseLottoTicket(List<Integer> numbers, LottoType lottoType) {
+    private PurchaseLottoTicket(List<Integer> numbers, LottoType lottoType) {
         super(numbers);
         this.lottoType = lottoType;
     }
 
-    public static PurchaseLottoTicket create(List<Integer> numbers, LottoType lottoType) {
-        return new PurchaseLottoTicket(numbers, lottoType);
+    public static PurchaseLottoTicket create(LottoNumberGenerator lottoNumberGenerator) {
+        return new PurchaseLottoTicket(lottoNumberGenerator.generate(), lottoNumberGenerator.getLottoType());
     }
 
     public LottoResult check(WinningLottoTicket winningNumbers) {
@@ -22,6 +24,10 @@ public class PurchaseLottoTicket extends LottoTicket {
 
     public LottoType getLottoType() {
         return lottoType;
+    }
+
+    public boolean equalsLottoType(LottoType lottoType) {
+        return this.lottoType.equals(lottoType);
     }
 
     private long matchWinningNumbers(WinningLottoTicket winningNumbers) {

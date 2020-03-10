@@ -1,3 +1,4 @@
+import zunior.lotto.generator.exception.PaymentException;
 import zunior.lotto.generator.model.*;
 import zunior.lotto.generator.service.LottoNumberGenerator;
 import zunior.lotto.generator.service.impl.AutomaticLottoNumberGenerator;
@@ -20,7 +21,9 @@ public class Main {
 
         OutputConsoleView.printLottoTickets(purchaseLottoTickets);
 
-        showResult(purchaseLottoTickets);
+        WinningLottoTicket winningLottoTicket = inputWinningLottoTicket();
+
+        showResult(purchaseLottoTickets, winningLottoTicket);
     }
 
     private static LottoPayment inputLottoPayment() {
@@ -46,16 +49,24 @@ public class Main {
     }
 
     private static PurchaseLottoTickets showAutomaticLottoTickets(LottoPayment lottoPayment) {
+        if (lottoPayment == null) {
+            throw new PaymentException("정상적인 금액이 아닙니다.");
+        }
+
         LottoNumberGenerator lottoNumberGenerator = new AutomaticLottoNumberGenerator();
-        return PurchaseLottoTickets.create(lottoPayment, lottoNumberGenerator);
+        return PurchaseLottoTickets.create(lottoPayment.buyLottoTicketsWithMaximum(LOTTO_TICKET_PRICE), lottoNumberGenerator);
     }
 
-    private static void showResult(PurchaseLottoTickets purchaseLottoTickets) {
+    private static WinningLottoTicket inputWinningLottoTicket() {
         String winningNumberString = InputView.inputWinningNumber();
-        Integer bonusNumber = InputView.inputBonusNumber();
-
         List<Integer> winningNumbers = convertToIntegerList(winningNumberString);
-        LottoResults lottoResults = purchaseLottoTickets.checkAll(WinningLottoTicket.create(winningNumbers, bonusNumber));
+        Integer bonusNumber = InputView.inputBonusNumber();
+        return WinningLottoTicket.create(winningNumbers, bonusNumber);
+    }
+
+
+    private static void showResult(PurchaseLottoTickets purchaseLottoTickets, WinningLottoTicket winningLottoTicket) {
+        LottoResults lottoResults = purchaseLottoTickets.checkAll(winningLottoTicket);
         OutputConsoleView.printLottoResults(lottoResults);
     }
 }

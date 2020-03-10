@@ -49,7 +49,7 @@ public class LottoResults {
     private double getPurchaseAmount() {
         return (double) result.keySet()
                 .stream()
-                .mapToLong(key -> result.getOrDefault(key, 0L))
+                .mapToLong(lottoResult -> result.getOrDefault(lottoResult, 0L))
                 .sum() * LOTTO_TICKET_PRICE;
     }
 }

@@ -15,7 +15,7 @@ public class LottoPayment {
     }
 
     public void buyLottoTickets(Integer lottoCount, Integer lottoTicketPrice) {
-        money -= lottoCount * lottoTicketPrice;
+        money -= (lottoCount * lottoTicketPrice);
 
         if (money < 0) {
             throw new PaymentException(lottoCount + "장 구입하기엔 돈이 부족합니다.");
@@ -23,6 +23,7 @@ public class LottoPayment {
     }
 
     public Integer buyLottoTicketsWithMaximum(Integer lottoTicketPrice) {
+        validate(lottoTicketPrice);
         return money / lottoTicketPrice;
     }
 

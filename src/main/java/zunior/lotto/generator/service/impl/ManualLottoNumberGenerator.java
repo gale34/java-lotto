@@ -11,14 +11,9 @@ public class ManualLottoNumberGenerator implements LottoNumberGenerator {
 
     private Queue<List<Integer>> manualLottoNumbers;
 
-    private ManualLottoNumberGenerator() {
-    }
-
     public ManualLottoNumberGenerator(List<List<Integer>> lottoNumbers) {
         manualLottoNumbers = new LinkedList<>();
-        for(List<Integer> lottoNumber : lottoNumbers) {
-            manualLottoNumbers.add(lottoNumber);
-        }
+        manualLottoNumbers.addAll(lottoNumbers);
     }
 
     @Override

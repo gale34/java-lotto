@@ -2,6 +2,7 @@ package zunior.lotto.generator.view;
 
 import zunior.lotto.generator.model.LottoResult;
 import zunior.lotto.generator.model.LottoResults;
+import zunior.lotto.generator.model.LottoType;
 import zunior.lotto.generator.model.PurchaseLottoTickets;
 
 import java.util.Arrays;
@@ -16,11 +17,10 @@ public class OutputConsoleView {
     public static void printLottoTickets(PurchaseLottoTickets purchaseLottoTickets) {
         System.out.println(String.format(
                 PURCHASE_SHOW_FORMAT,
-                purchaseLottoTickets.getManualTicketCount(),
-                purchaseLottoTickets.getAutomaticTicketCount()));
+                purchaseLottoTickets.getTicketCountByLottoType(LottoType.MANUAL),
+                purchaseLottoTickets.getTicketCountByLottoType(LottoType.AUTOMATIC)));
 
         purchaseLottoTickets.getLottoNumbers()
-                .stream()
                 .forEach(numbers -> System.out.println(Arrays.deepToString(numbers)));
 
         System.out.println();
