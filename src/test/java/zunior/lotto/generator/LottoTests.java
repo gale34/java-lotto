@@ -10,12 +10,13 @@ import org.junit.jupiter.params.provider.NullSource;
 import org.mockito.junit.jupiter.MockitoExtension;
 import zunior.lotto.generator.exception.LottoTicketException;
 import zunior.lotto.generator.model.LottoResult;
-import zunior.lotto.generator.model.LottoType;
 import zunior.lotto.generator.model.PurchaseLottoTicket;
 import zunior.lotto.generator.model.WinningLottoTicket;
 import zunior.lotto.generator.service.LottoNumberGenerator;
 import zunior.lotto.generator.service.impl.AutomaticLottoNumberGenerator;
+import zunior.lotto.generator.service.impl.ManualLottoNumberGenerator;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
@@ -34,7 +35,10 @@ public class LottoTests {
     @NullSource
     @MethodSource
     public void abnormalLottoTest(List<Integer> numbers) {
-        assertThatExceptionOfType(LottoTicketException.class).isThrownBy(() -> PurchaseLottoTicket.create(numbers, LottoType.AUTOMATIC));
+        List<List<Integer>> lottoNumbers = new ArrayList<>();
+        lottoNumbers.add(numbers);
+        LottoNumberGenerator lottoNumberGenerator = new ManualLottoNumberGenerator(lottoNumbers);
+        assertThatExceptionOfType(LottoTicketException.class).isThrownBy(() -> PurchaseLottoTicket.create(lottoNumberGenerator));
     }
 
     @DisplayName("로또 자동 생성 번호 개수 검증")
@@ -58,13 +62,13 @@ public class LottoTests {
         LottoNumberGenerator lottoNumberGenerator = mock(LottoNumberGenerator.class);
         given(lottoNumberGenerator.generate()).willReturn(lottoNumbers);
 
-        PurchaseLottoTicket lottoTicket = PurchaseLottoTicket.create(lottoNumberGenerator.generate(), lottoNumberGenerator.getLottoType());
+        PurchaseLottoTicket lottoTicket = PurchaseLottoTicket.create(lottoNumberGenerator);
         LottoResult actualResult = lottoTicket.check(WinningLottoTicket.create(winningNumbers, bonusNumber));
         assertThat(actualResult).isEqualTo(lottoResult);
     }
 
     private Integer[] lottoNumbers(LottoNumberGenerator lottoNumberGenerator) {
-        PurchaseLottoTicket lottoTicket = PurchaseLottoTicket.create(lottoNumberGenerator.generate(), lottoNumberGenerator.getLottoType());
+        PurchaseLottoTicket lottoTicket = PurchaseLottoTicket.create(lottoNumberGenerator);
         return lottoTicket.toArray();
     }
 
